@@ -4,6 +4,8 @@ import  { PrismaClient } from '@prisma/client';
 import  express  from 'express';
 import path from 'path'
 import * as userController from './user/user.controller'
+import * as gardenController from './garden/garden.controller'
+
 declare module 'express-session' {
   export interface SessionData {
     user: { [key: string]: any };
@@ -40,6 +42,9 @@ const setupServer = () => {
   app.post('/login', userController.login);
   app.get('/logout', userController.logout);
   app.get('/login-status', userController.loginStatus);
+
+  app.post('/create-garden', gardenController.createGarden);
+  app.get('/garden-status', gardenController.gardenStatus);
 
   return app
 };
