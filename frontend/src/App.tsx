@@ -1,34 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import './App.css';
+import Signup from './signup/Signup';
+import Login from './login/Login';
+import { logout, loginStatus } from './util/fetchRequests';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [loggedIn, setLoggedIn] = useState(true)
+  const [user, setUser] = useState({ name: 'None' })
+  const [signupMode, setSignupMode] = useState<boolean>(false)
+
+  function changeSignupMode(mode: boolean) {
+    setSignupMode(mode)
+  }
+
+  async function exit() {
+    const logoutStatus = await logout()
+    console.log(logoutStatus)
+    setUser({ name: 'none'})
+    setLoggedIn(false)
+  }
+
+  const fetchLogin = async () => {
+    const status = await loginStatus()
+    if (status.status === 'logged in')  {
+      setLoggedIn(true)
+      setUser(status.user)
+    }
+  }
+
+  useEffect(() => {
+    fetchLogin()
+  }, [])
+
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    {loggedIn ? (
+      <div className='wrapper'>
+        <div className="navigation"> 
+          <span className="welcome">Hello { user.name }</span>
+          <span className="logout"><a onClick={() => {exit()}} >Log out</a></span>
+        </div> 
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    ) : signupMode ? (
+      <Signup changeSignupMode={changeSignupMode} />
+    ) : (
+      <Login changeSignupMode={changeSignupMode} fetchLogin={fetchLogin} />
+    )}
+  </>
   )
 }
 

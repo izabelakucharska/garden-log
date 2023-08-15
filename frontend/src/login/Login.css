@@ -1,0 +1,42 @@
+.login-form {
+  padding: 2em;
+  border: 2px solid #C3E8BD;
+  background-color: #C3E8BD;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+.form-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+.password-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  border: 0;
+}
+input {
+  padding: 0.5em;
+}
+label:hover, input[type="submit"]:hover {
+  cursor: pointer;
+}
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  display: block;
+  color: #5B7553;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+.error {
+color: rgb(200, 101, 101);
+}
