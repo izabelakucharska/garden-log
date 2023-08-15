@@ -79,7 +79,9 @@ export async function loginStatus(req: Request, res: Response) {
   if (req.session.user) {
     res.status(200).send({
       user: {
-        name: req.session.user.name
+        name: req.session.user.name,
+        email: req.session.user.email,
+        id: req.session.user.id
       },
       status: "logged in"
     })
