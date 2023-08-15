@@ -3,12 +3,12 @@ import './Login.css';
 import { login } from '../util/fetchRequests';
 
 interface ILoginProps {
-  changeSignupMode: Function,
+  setPage: Function,
   fetchLogin: Function
 }
 
 export default function Login(props: ILoginProps) {
-  const { changeSignupMode, fetchLogin } = props
+  const { setPage, fetchLogin } = props
   const minLength = 8;
   const maxLength = 16;
   const [error, setError] = useState('');
@@ -29,6 +29,7 @@ export default function Login(props: ILoginProps) {
   }
 
   return (
+    <div className='login-card'>
     <form className='login-form' action='#' method='POST' onSubmit={(event) => submitHandler(event)} >
       <h1>Log In</h1>
       {error ? (<span className="error">{error}</span>) : ("")}
@@ -41,7 +42,8 @@ export default function Login(props: ILoginProps) {
         <input id='user-password' name='user-password' type='password' minLength={minLength} maxLength={maxLength} required />
       </div>
       <input type="submit" value="Log in" />
-      <p>Need to register a new account? <a onClick={() => { changeSignupMode(true) }} >Register</a></p>
+      <p>Need to register a new account? <a onClick={() => { setPage('signup') }} >Register</a></p>
     </form>
+    </div>
   )
 }

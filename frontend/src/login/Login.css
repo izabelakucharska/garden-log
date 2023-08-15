@@ -13,6 +13,17 @@
   align-items: baseline;
   gap: 1rem;
 }
+.login-card {
+  background-color: #e7e8e3;
+  border-radius: 4px;
+  padding: 1em;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  margin: 2em auto;
+}
 .password-fields {
   display: flex;
   flex-direction: column;

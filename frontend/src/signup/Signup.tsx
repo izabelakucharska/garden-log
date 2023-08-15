@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { signup } from '../util/fetchRequests';
 
 interface ISignupProps {
-  changeSignupMode: Function
+  setPage: Function
 }
 
 export default function Signup(props: ISignupProps) {
-  const { changeSignupMode } = props;
+  const { setPage } = props;
   const minLength = 8;
   const maxLength = 16;
   const [error, setError] = useState('');
@@ -26,11 +26,12 @@ export default function Signup(props: ISignupProps) {
       setError(result.error)
     } else {
       setError('')
-      changeSignupMode(false)
+      setPage('login')
     }   
   }
 
   return (
+  <div className='signup-card'>
     <form className='signup-form' action='#' method='POST' onSubmit={(event) => submitHandler(event)} >
       <h1>Registration</h1>
       {error ? (<span className="error">{error}</span>) : ("")}
@@ -53,7 +54,8 @@ export default function Signup(props: ISignupProps) {
         </div>
       </fieldset>
       <input type="submit" value="Submit" />
-      <p>Already have an account? <a onClick={() => { changeSignupMode(false) }} >Log in</a></p>
+      <p>Already have an account? <a onClick={() => { setPage('login') }} >Log in</a></p>
     </form>
+    </div>
   )
 }

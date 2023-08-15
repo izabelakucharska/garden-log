@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.4.2",
+    "aws-sdk": "^2.1436.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
