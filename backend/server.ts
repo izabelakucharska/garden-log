@@ -2,11 +2,17 @@ import expressSession from 'express-session';
 import { PrismaSessionStore } from '@quixo3/prisma-session-store';
 import  { PrismaClient } from '@prisma/client';
 import  express  from 'express';
-// import bcrypt from 'bcrypt';
+import path from 'path'
+import * as userController from './user/user.controller'
+declare module 'express-session' {
+  export interface SessionData {
+    user: { [key: string]: any };
+  }
+}
+
 
 const setupServer = () => {
   const app = express();
-  // const saltRounds = 10;
 
   app.use(
     expressSession({
@@ -28,7 +34,12 @@ const setupServer = () => {
   );
 
   app.use(express.json());
-  app.use("/", express.static(__dirname + "/public"));
+  app.use("/", express.static(path.join(__dirname, '/../frontend/dist')));
+
+  app.post('/signup', userController.signup);
+  app.post('/login', userController.login);
+  app.get('/logout', userController.logout);
+  app.get('/login-status', userController.loginStatus);
 
   return app
 };
