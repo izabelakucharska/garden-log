@@ -11,11 +11,12 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  email     String   @unique
-  name      String?
-  garden    Garden?
+  id           Int      @id @default(autoincrement())
+  createdAt    DateTime @default(now())
+  email        String   @unique
+  passwordHash String
+  name         String
+  garden       Garden?
 }
 
 model Garden {
