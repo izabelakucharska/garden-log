@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  email     String   @unique
+  name      String?
+  garden    Garden?
+}
+
+model Garden {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  name      String   @db.VarChar(255)
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int      @unique
+  latitude  Decimal  @db.Decimal(8,6)
+  longitude Decimal  @db.Decimal(9,6)
+  plants    Plant[]
+}
+
+model Plant {
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  name       String   @db.VarChar(255)
+  genus      String?  
+  species    String?  
+  image      String?
+  garden     Garden  @relation(fields: [gardenId], references: [id])
+  gardenId   Int
+  conditions Condition[]
+}
+
+model Condition {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  temperature Int? 
+  weather     String?
+  fertilizer  String?
+  water       Boolean?
+  bloom       Boolean?
+  fruit       Boolean?
+  condition   Decimal? @db.Decimal(1,1)
+  description String?
+  plant       Plant    @relation(fields: [plantId], references: [id])
+  plantId     Int
+}
+
+model Session {
+  id          String   @id
+  sid         String   @unique
+  data        String  
+  expiresAt   DateTime
+}
