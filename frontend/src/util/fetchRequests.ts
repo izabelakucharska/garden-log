@@ -10,6 +10,12 @@ interface ISignupData {
   password_confirmation: string
 }
 
+interface IGardenData {
+  name: string,
+  latitude: number,
+  longitude: number
+}
+
 
 const logout = async () => {
   const response = await fetch('/logout')
@@ -46,10 +52,35 @@ const signup = async (data: ISignupData) => {
   return response.json()
 }
 
+const gardenStatus = async () => {
+  const response = await fetch('/garden-status')
+  return response.json()
+}
+const createGarden = async (data: IGardenData) => {
+  const response = await fetch('create-garden', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+  })
+  return response.json()
+}
+
+const getClimate = async (lat: number, lon: number) => {
+  const response = await fetch(`http://climateapi.scottpinkelman.com/api/v1/location/${lat}/${lon}`)
+  return response.json()
+}
+
 export {
   logout,
   loginStatus,
   login,
   signup,
+  gardenStatus,
+  createGarden,
+  getClimate,
 }
 
+export type { IGardenData }
