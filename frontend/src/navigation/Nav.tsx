@@ -24,7 +24,7 @@ export default function Nav(props: INavProps) {
       <span className="home-button"><a onClick={() => setPage('home')}><i className="fa-brands fa-pagelines green"></i>Garden Log</a></span>
       <div className="right-buttons">
         <span className="nav-item">
-          <input className="search" type="text" placeholder='search for plants' />
+          <input className="search" type="text" placeholder='Search for plants...' />
          
           <button className="button-4 search-button"><i className="fa-solid fa-magnifying-glass"></i></button>
         </span>
