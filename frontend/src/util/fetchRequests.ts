@@ -16,6 +16,13 @@ interface IGardenData {
   longitude: number
 }
 
+interface IPlantData {
+  name: string,
+  gardenId: number,
+  genus?: string,  
+  species?: string,
+  image?: string
+}
 
 const logout = async () => {
   const response = await fetch('/logout')
@@ -73,6 +80,18 @@ const getClimate = async (lat: number, lon: number) => {
   return response.json()
 }
 
+const addPlant = async (data: IPlantData) => {
+  const response = await fetch ('add-plant', {
+    method: 'POST', 
+    body: JSON.stringify(data),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+  })
+  return response.json()
+}
+
 export {
   logout,
   loginStatus,
@@ -81,6 +100,8 @@ export {
   gardenStatus,
   createGarden,
   getClimate,
+  addPlant
 }
 
 export type { IGardenData }
+export type { IPlantData }
