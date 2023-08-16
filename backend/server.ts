@@ -5,6 +5,7 @@ import  express  from 'express';
 import path from 'path'
 import * as userController from './user/user.controller'
 import * as gardenController from './garden/garden.controller'
+import * as plantController from './plant/plant.controller'
 
 declare module 'express-session' {
   export interface SessionData {
@@ -45,6 +46,8 @@ const setupServer = () => {
 
   app.post('/create-garden', gardenController.createGarden);
   app.get('/garden-status', gardenController.gardenStatus);
+
+  app.post('/add-plant', plantController.createPlant)
 
   return app
 };
