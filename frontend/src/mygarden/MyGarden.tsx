@@ -1,13 +1,21 @@
 import './MyGarden.css';
 import { SyntheticEvent, useState, useEffect } from "react"
 import { gardenStatus, createGarden, getClimate, IGardenData } from '../util/fetchRequests';
+import Plant from '../plant/Plant'
+import NewPlant from '../newPlant/NewPlant'
+
+interface IGardenResponse extends IGardenData {
+  id: number
+}
 
 export default function MyGarden() {
     const [needsGarden, setNeedsGarden] = useState(false)
     const [error, setError] = useState('')
-    const [garden, setGarden] = useState<IGardenData | null>(null)
+    const [garden, setGarden] = useState<IGardenResponse | null>(null)
     const [climate, setClimate] = useState('')
-    
+    const [plants, setPlants] = useState([])
+    const [addingPlant, setAddingPlant] = useState(false)
+
     const fetchGardenStatus = async () => {
       const result = await gardenStatus()
       if (result.garden === null)  {
@@ -15,6 +23,7 @@ export default function MyGarden() {
         setNeedsGarden(true)
       } else {
         setGarden(result)
+        setPlants(result.plants)
       }
     }
   
@@ -90,11 +99,27 @@ export default function MyGarden() {
 
         </div>
       ) : garden ? (
-       <div className="garden-card">
-        <h2 className="heading">{garden.name}</h2>
-        <p className="italic">{climate}</p>
-       </div>
-      ) : ('')}
+        <>
+          <div className="garden-card">
+            <h2 className="heading">{garden.name}</h2>
+            <p className="italic">{climate}</p>
+          </div>
+          <div className="plant-grid">
+          {plants.map((plant, i) => {
+            return (
+              <Plant plant={plant} key={`plant${i}`} />
+            )
+          })}
+          {addingPlant ? (
+            <NewPlant gardenId={garden.id} setAddingPlant={setAddingPlant} fetchGardenStatus={fetchGardenStatus} />
+          ) : (
+            <div className='add-plant-card' onClick={() => {setAddingPlant(true)}}><i className="fa-solid fa-plus"></i></div>
+          )}
+        </div>
+      </>
+      ) : ('')}    
     </div> 
   )
 }
+
+

@@ -26,3 +26,10 @@
 .italic {
   font-style: italic;
 }
+.add-plant-card {
+  font-size: 96px;
+  cursor: pointer;
+}
+.add-plant-card:hover {
+  background-color: aliceblue;
+} 
