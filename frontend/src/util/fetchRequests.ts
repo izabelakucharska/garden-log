@@ -24,6 +24,18 @@ interface IPlantData {
   image?: string
 }
 
+interface IConditionData {
+  temperature?: number, 
+  weather?:     string,
+  fertilizer?:  string,
+  water?:       boolean,
+  bloom?:       boolean,
+  fruit?:       boolean,
+  condition?:   number,
+  description?: string,
+  plantId:      number
+}
+
 const logout = async () => {
   const response = await fetch('/logout')
   return response.json()
@@ -92,6 +104,24 @@ const addPlant = async (data: IPlantData) => {
   return response.json()
 }
 
+const addCondition = async (data: IConditionData) => {
+  const response = await fetch ('condition', {
+    method: 'POST', 
+    body: JSON.stringify(data),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+  })
+  return response.json()
+}
+
+const getConditionsForPlant = async (plantId: number) => {
+  const response = await fetch (`conditions?plantId=${plantId}`)
+  return response.json()
+}
+
+
 export {
   logout,
   loginStatus,
@@ -100,7 +130,9 @@ export {
   gardenStatus,
   createGarden,
   getClimate,
-  addPlant
+  addPlant,
+  addCondition,
+  getConditionsForPlant
 }
 
 export type { IGardenData }
