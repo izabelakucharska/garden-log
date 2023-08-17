@@ -86,6 +86,10 @@ export default function PlantDetail(props: IPlantProps) {
                 <span>{condition.fertilizer ? condition.fertilizer : " -"}</span>
               </div>
               <div className="plant-condition-value">
+                <span>Watered: </span>
+                <span>{condition.water ? "Watered" : "Not Watered"}</span>
+              </div>
+              <div className="plant-condition-value">
                 <span>Bloom: </span>
                 <span>{condition.bloom ? "Blooming" : "Not Blooming"}</span>
               </div>
