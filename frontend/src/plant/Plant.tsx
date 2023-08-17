@@ -1,6 +1,7 @@
-import "./plant.css"
+import "./Plant.css"
 
 interface IPlant {
+  id: number,
   name: string, 
   gardenId: number,
   genus?: string,  
@@ -28,3 +29,5 @@ export default function Plant(props: IPlantProps) {
     </div>
   )
 }
+
+export type { IPlant }
