@@ -21,7 +21,7 @@ export default function Plant(props: IPlantProps) {
         <div>
           <img className="plant-image"src={plant.image}></img>
           <h2>{plant.name}</h2>
-          <p>{plant.genus} {plant.species}</p>
+          <p className="italic" >{plant.genus} {plant.species}</p>
         </div>
       ) : (
         <p>Loading...</p>
