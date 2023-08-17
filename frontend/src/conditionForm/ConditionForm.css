@@ -1,0 +1,23 @@
+.add-condition-form {
+  font-size: 18px;
+  background-color: #e7e8e3;
+  border-radius: 4px;
+  padding: 1em;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  width: 300px;
+  text-align-last: auto;
+  margin-bottom: inherit;
+}
+
+.add-condition-form h1 {
+  font-size: 30px;
+  text-align: center;
+}
+
+.add-condition-form .form-field {
+  margin-bottom: 0.5em;
+}
+
+.centered {
+  text-align: center;
+}
