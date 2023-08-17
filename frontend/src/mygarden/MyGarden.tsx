@@ -43,7 +43,7 @@ export default function MyGarden(props: IMyGardenProps) {
     async function fetchClimate() {
       if (garden) {
         const result = await getClimate(garden.latitude, garden.longitude)
-        setClimate(result.return_values[0].zone_description)
+        setClimate(result.data[0].text)
       }
       
     }
