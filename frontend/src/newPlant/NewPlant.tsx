@@ -1,5 +1,5 @@
 import './NewPlant.css'
-import { useRef, useState, SyntheticEvent } from 'react'
+import { useState, SyntheticEvent } from 'react'
 import { addPlant } from '../util/fetchRequests';
 
 interface INewPlantProps {
@@ -10,30 +10,8 @@ interface INewPlantProps {
 
 export default function NewPlant(props: INewPlantProps) {
   const { gardenId, setAddingPlant, fetchGardenStatus } = props;
-  const fileInputRef = useRef(null)
   const [error, setError] = useState('')
- 
 
-
-  function handleImageSelect(event: SyntheticEvent) {
-    event.preventDefault()
-    if(fileInputRef.current) {
-      (fileInputRef.current as HTMLInputElement).click()
-    }
-  }
-
-  function handleFileSelect(event: SyntheticEvent) {
-    event.preventDefault() 
-    const target = (event.target as HTMLInputElement)
-    const file: File = (target.files as FileList)[0];
-    // no files over 5 mb
-    if (file.size / 1024/ 1024 > 5) {
-      setError('file must be less than 5MB');
-      if (fileInputRef.current) {
-        (fileInputRef.current as HTMLInputElement).value = '';
-      }
-    }   
-  }
   
   async function submitHandler(event: SyntheticEvent):Promise<void> {
     event.preventDefault()
@@ -42,7 +20,7 @@ export default function NewPlant(props: INewPlantProps) {
       gardenId: gardenId,
       genus: (document.querySelector('#genus') as HTMLInputElement).value,
       species: (document.querySelector('#species') as HTMLInputElement).value,
-      image: "https://en.wikipedia.org/wiki/Passiflora_edulis#/media/File:Passiflora_edulis_forma_flavicarpa.jpg"
+      image: (document.querySelector('#image') as HTMLInputElement).value,
     }
     const plant = await addPlant(data)
 
@@ -71,9 +49,11 @@ export default function NewPlant(props: INewPlantProps) {
           <label htmlFor='species'>Species:</label>
           <input id='species' name='species' type='text' placeholder='edulis'/>
         </div>
-        <input type="file" onChange={(event) => {handleFileSelect(event)}} hidden></input>
-        <button className="button-4" onClick={(event) => {handleImageSelect(event)}}>Select Image</button>
-        <input type="submit" value="Add Plant" />
+        <div className='form-field'>
+          <label htmlFor='image'>Image:</label>
+          <input id='image' name='image' type='text' placeholder='https://i.imgur.com/V9HS1ac.jpeg'/>
+        </div>
+        <input className="button-4" type="submit" value="Add Plant" />
       </form>
     </div>
   )
