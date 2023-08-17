@@ -51,7 +51,7 @@ model Condition {
   water       Boolean?
   bloom       Boolean?
   fruit       Boolean?
-  condition   Decimal? @db.Decimal(1,1)
+  condition   Int?
   description String?
   plant       Plant    @relation(fields: [plantId], references: [id])
   plantId     Int
