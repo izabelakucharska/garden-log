@@ -8,7 +8,12 @@ interface IGardenResponse extends IGardenData {
   id: number
 }
 
-export default function MyGarden() {
+interface IMyGardenProps {
+  selectPlant: Function,
+}
+
+export default function MyGarden(props: IMyGardenProps) {
+    const { selectPlant } = props
     const [needsGarden, setNeedsGarden] = useState(false)
     const [error, setError] = useState('')
     const [garden, setGarden] = useState<IGardenResponse | null>(null)
@@ -105,17 +110,21 @@ export default function MyGarden() {
             <p className="italic">{climate}</p>
           </div>
           <div className="plant-grid">
+            
           {plants.map((plant, i) => {
             return (
-              <Plant plant={plant} key={`plant${i}`} />
+              <div onClick={() => {selectPlant(plant)}}>
+                <Plant  plant={plant} key={`plant${i}`} />
+              </div>
             )
           })}
-          {addingPlant ? (
-            <NewPlant gardenId={garden.id} setAddingPlant={setAddingPlant} fetchGardenStatus={fetchGardenStatus} />
-          ) : (
-            <div className='add-plant-card' onClick={() => {setAddingPlant(true)}}><i className="fa-solid fa-plus"></i></div>
-          )}
+           {addingPlant ? (
+          <NewPlant gardenId={garden.id} setAddingPlant={setAddingPlant} fetchGardenStatus={fetchGardenStatus} />
+        ) : (
+          <div className='add-plant-card' onClick={() => {setAddingPlant(true)}}><i className="fa-solid fa-plus"></i></div>
+        )}
         </div>
+       
       </>
       ) : ('')}    
     </div> 

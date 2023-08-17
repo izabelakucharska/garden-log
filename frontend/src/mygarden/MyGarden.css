@@ -29,7 +29,29 @@
 .add-plant-card {
   font-size: 96px;
   cursor: pointer;
+  background-color: #e7e8e3;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  text-align: center;
+  color: rgb(80, 114, 80);
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
 }
+
 .add-plant-card:hover {
-  background-color: aliceblue;
-} 
+  background-color: rgb(212, 255, 192);
+}
+
+.plant-grid {
+  margin: 2em auto;
+  border-radius: 4px;
+  padding: 1em;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-columns: minmax(100px, auto);
+  max-width: 1200px;
+}
