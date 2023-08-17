@@ -88,7 +88,7 @@ const createGarden = async (data: IGardenData) => {
 }
 
 const getClimate = async (lat: number, lon: number) => {
-  const response = await fetch(`http://climateapi.scottpinkelman.com/api/v1/location/${lat}/${lon}`)
+  const response = await fetch(`https://ummiume.mapresso.com/backend/server/climate/koeppen/?lat=${lat}&lon=${lon}`)
   return response.json()
 }
 
