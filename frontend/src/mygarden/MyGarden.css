@@ -12,11 +12,12 @@
 }
 
 .new-garden-form {
-  margin: 2em;
+  margin: 2em auto;
   background-color: #e7e8e3;
   border-radius: 4px;
   padding: 1em;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  max-width: 40%;
 }
 
 .heading {
