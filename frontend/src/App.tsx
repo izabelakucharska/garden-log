@@ -14,7 +14,7 @@ import { IPlant } from './plant/Plant';
 
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true)
+  const [loggedIn, setLoggedIn] = useState(false)
   const [user, setUser] = useState({ name: 'None', email: 'none@null.com', id: 0 })
   const [page, setPage] = useState("home")
   const [selectedPlant, setSelectedPlant] = useState<IPlant | null>(null)
