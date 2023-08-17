@@ -7,14 +7,17 @@ import Signup from './signup/Signup';
 import Login from './login/Login';
 import Nav from './navigation/Nav';
 import MyGarden from './mygarden/MyGarden';
-import Home from './home/Home'
+import Home from './home/Home';
+import PlantDetail from './plantDetail/PlantDetail'
 import { logout, loginStatus } from './util/fetchRequests';
+import { IPlant } from './plant/Plant';
 
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(true)
   const [user, setUser] = useState({ name: 'None', email: 'none@null.com', id: 0 })
   const [page, setPage] = useState("home")
+  const [selectedPlant, setSelectedPlant] = useState<IPlant | null>(null)
 
   // const cld = new Cloudinary({
   //   cloud: {
@@ -39,6 +42,11 @@ function App() {
     }
   }
 
+  function selectPlant(plant: IPlant) {
+    setSelectedPlant(plant)
+    setPage('plantDetail')
+  }
+
   useEffect(() => {
     fetchLogin()
   }, [])
@@ -52,10 +60,13 @@ function App() {
       case 'login' :
         return <Login setPage={setPage} fetchLogin={fetchLogin} />
       case 'mygarden':
-        return <MyGarden />
+        return <MyGarden selectPlant={selectPlant} />
+      case 'plantDetail':
+        if (selectedPlant) {
+          return <PlantDetail plant={selectedPlant} />
+        }
     }
   }
-
 
   return (
     <div>
