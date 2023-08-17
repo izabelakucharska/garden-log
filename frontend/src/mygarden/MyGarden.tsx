@@ -98,8 +98,8 @@ export default function MyGarden(props: IMyGardenProps) {
               <label htmlFor='longitude'>Longitude:</label>
               <input id='longitude' name='longitude' type='text' placeholder='139.70' required />
             </div>
-            <button onClick={(event) => { getCoordinates(event) }}>Get Coordinates</button>
-            <input type="submit" value="Create Garden" />
+            <button className="button-4" onClick={(event) => { getCoordinates(event) }}>Get Coordinates</button>
+            <input className="button-4" type="submit" value="Create Garden" />
           </form>
 
         </div>
